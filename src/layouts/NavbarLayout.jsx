@@ -6,6 +6,7 @@ import {
     Input,
   } from "@material-tailwind/react";
 import { BellIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 export default function NavbarLayout() {
     return(
@@ -13,12 +14,12 @@ export default function NavbarLayout() {
             <Navbar className="mt-4 mx-auto max-w-screen-xl px-4 py-3 bg-green-400" data-aos="fade-left">
                 <div className="flex flex-wrap items-center justify-between gap-y-4 text-blue-gray-900">
                     <Typography
-                    as="a"
-                    href="#"
                     variant="h6"
                     className="mr-4 ml-2 cursor-pointer py-1.5"
                     >
-                    Green House
+                        <Link to="/">
+                            Green House
+                        </Link>
                     </Typography>
 
                     <div className="relative flex w-full gap-2 md:w-max">
