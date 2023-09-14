@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path='/' element={ <BaseLayout/> } >
             <Route index element={ <Home/> } />
-            <Route path=':plantTag' element={ <PlantDetail/> } />
+            <Route path='tanaman/:plantTag' element={ <PlantDetail/> } />
           </Route>
         </Routes>
       </BrowserRouter>
