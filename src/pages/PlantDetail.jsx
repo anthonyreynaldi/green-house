@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
 import PlantDetailCarousel from "../components/PlantDetailCarousel";
 import PlantDescription from "../components/PlantDescription";
-import { collectionName, db, plantsCollectionRef } from "../config/firebase";
-import { CollectionReference, doc, getDocs, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Spinner, Typography } from "@material-tailwind/react";
+import { getPlant } from "../utils/plantDataUtils";
 
 export default function PlantDetail(){
     const { plantTag } = useParams()
@@ -12,25 +11,13 @@ export default function PlantDetail(){
     const [isPlantExist, setIsPlantExist] = useState(true);
 
     useEffect(() => {
-        const getPlantData = async () => {
-            try {
-                const docRef = doc(db, collectionName, plantTag);
-                const docSnapshot = await getDoc(docRef);
-                
-                if (docSnapshot.exists()) {
-                    setPlantData(docSnapshot.data());
-                    console.log(docSnapshot.data());
-                } else {
-                  // Document doesn't exist
-                  setIsPlantExist(false);
-                  console.log('No such document!');
-                }
-              } catch (error) {
-                console.error('Error fetching document:', error);
-              }
-        }
-
-        getPlantData();
+        getPlant(plantTag).then((plantData) => {
+            if(plantData){
+                setPlantData(plantData);
+            }else{
+                setIsPlantExist(false);
+            }
+        });
     }, [])
 
 

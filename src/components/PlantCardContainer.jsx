@@ -1,39 +1,20 @@
 import { useEffect, useState } from "react";
 import PlantCard from "./PlantCard"
-import { plantsCollectionRef } from "../config/firebase";
-import { getDocs } from "firebase/firestore";
 import { Spinner, Typography } from "@material-tailwind/react";
+import { getAllPlant } from "../utils/plantDataUtils";
 
 export default function PlantCardContainter(){
-    const plants = Array(5).fill(0)
-
     const [plantsData, setPlantsData] = useState(null);
     const [isPlantExist, setIsPlantExist] = useState(true);
 
     useEffect(() => {
-        const getPlantsData = async () => {
-            try {
-                const querySnapshot = await getDocs(plantsCollectionRef);
-
-                const allPlants = querySnapshot.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id
-                }));
-                
-                if (querySnapshot.size > 0) {
-                    setPlantsData(allPlants);
-                    console.log(allPlants);
-                } else {
-                  // Document doesn't exist
-                  setIsPlantExist(false);
-                  console.log('No such document!');
-                }
-              } catch (error) {
-                console.error('Error fetching document:', error);
-              }
-        }
-
-        getPlantsData();
+        getAllPlant().then((allPlants) => {
+            if(allPlants){
+                setPlantsData(allPlants);
+            }else{
+                setIsPlantExist(false);
+            }
+        })
     }, [])
 
     return (

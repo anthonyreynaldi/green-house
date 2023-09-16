@@ -12,10 +12,10 @@ export default function PlantCard({name, nameLatin, images, tag}){
 
     return (
         <>
-            <Link to={tag ? "tanaman/" + tag : ""} data-swup-animation="circle">
+            <Link to={tag ? "tanaman/" + tag : ""}>
                 <Card className="bg-green-100" data-aos="fade-left">
                     <CardHeader floated={false} className="h-32 md:h-40 lg:h-52">
-                        <img className="h-full w-full object-cover transform scale-100 hover:scale-110 transition-transform duration-300" src={Array.isArray(images) ? images[0] : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"} />
+                        <img className="h-full w-full object-cover transform scale-100 hover:scale-110 transition-transform duration-300" src={Array.isArray(images) ? images[0] : "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"} />
                     </CardHeader>
 
                     <CardBody className="text-center">

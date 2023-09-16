@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import BaseLayout from './layouts/BaseLayout'
 import PlantDetail from './pages/PlantDetail'
 import NoPage from './pages/NoPage'
+import Admin from './pages/Admin'
+import AdminManage from './pages/AdminManage'
 
 
 function App() {
@@ -14,6 +16,9 @@ function App() {
           <Route path='/' element={ <BaseLayout/> } >
             <Route index element={ <Home/> } />
             <Route path='tanaman/:plantTag' element={ <PlantDetail/> } />
+            <Route path='login' element={ <PlantDetail/> } />
+            <Route path='admin' element={ <Admin/> } />
+            <Route path='admin/manage/:plantTag?' element={ <AdminManage/> } />
             <Route path='*' element={ <NoPage/> } />
           </Route>
         </Routes>
