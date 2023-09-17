@@ -6,6 +6,8 @@ import PlantDetail from './pages/PlantDetail'
 import NoPage from './pages/NoPage'
 import Admin from './pages/Admin'
 import AdminManage from './pages/AdminManage'
+import PrivateRoutes from './utils/PrivateRoutes'
+import Login from './pages/Login'
 
 
 function App() {
@@ -16,9 +18,11 @@ function App() {
           <Route path='/' element={ <BaseLayout/> } >
             <Route index element={ <Home/> } />
             <Route path='tanaman/:plantTag' element={ <PlantDetail/> } />
-            <Route path='login' element={ <PlantDetail/> } />
-            <Route path='admin' element={ <Admin/> } />
-            <Route path='admin/manage/:plantTag?' element={ <AdminManage/> } />
+            <Route path='login' element={ <Login/> } />
+            <Route element={ <PrivateRoutes/> } >
+              <Route path='admin' element={ <Admin/> } />
+              <Route path='admin/manage/:plantTag?' element={ <AdminManage/> } />
+            </Route>
             <Route path='*' element={ <NoPage/> } />
           </Route>
         </Routes>

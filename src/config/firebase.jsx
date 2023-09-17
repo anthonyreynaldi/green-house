@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { collection, getFirestore } from "firebase/firestore";
 import { getStorage, ref } from "firebase/storage";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAzTJfig9jYMHBJXst3afeJvEMeKNYmryg",
@@ -18,3 +19,6 @@ export const collectionName = "plants";
 export const plantsCollectionRef = collection(db, collectionName);
 export const storage = getStorage(app);
 export const plantImageFolder = "plant-images/";
+
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();
