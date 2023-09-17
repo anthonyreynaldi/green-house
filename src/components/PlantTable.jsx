@@ -29,6 +29,11 @@ export function PlantTable() {
     const [isPlantExist, setIsPlantExist] = useState(true);
     const [open, setOpen] = useState(false);
     const [plantId, setPlantId] = useState(null);
+
+    // Get base url
+    const currentUrl = window.location.href;
+    const baseUrl = currentUrl.match(/^(.*?:\/\/[^/]+)/)[0];
+    const baseLink = baseUrl + "/tanaman/";
  
     const handleOpen = (plantId) => {
         setPlantId(plantId);
@@ -63,6 +68,7 @@ export function PlantTable() {
     }, [])
 
     useEffect(() => {
+        //refresh the table if it from reirect back
         const handlePopState = () => {
             console.log("popedd");
             getAllPlant().then((allPlants) => {
@@ -190,9 +196,7 @@ export function PlantTable() {
                                 </td>
                                 <td className={classes}>
                                     <div className="flex items-center gap-3">
-                                        <div className="h-9 w-12 rounded-md border border-blue-gray-50 p-1">
-                                            <PlantQRCode link={name} name={name} nameLatin={nameLatin} />
-                                        </div>
+                                        <PlantQRCode link={baseLink+tag} name={name} nameLatin={nameLatin} />
                                     </div>
                                 </td>
 
