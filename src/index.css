@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.default-css {
+    text-align: initial;
+}
+
+.default-css h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+}
+
+.default-css h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+}
+
+.default-css h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.default-css h4 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
+}
+
+.default-css h5 {
+    font-size: 0.83em;
+    font-weight: bold;
+    margin-top: 1.67em;
+    margin-bottom: 1.67em;
+}
+
+.default-css h6 {
+    font-size: 0.67em;
+    font-weight: bold;
+    margin-top: 2.33em;
+    margin-bottom: 2.33em;
+}
+
+.default-css p {
+    font-size: 1em;
+    font-weight: normal;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.default-css ul {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 2.5em;
+    padding-left: 40px;
+    list-style-type: disc;
+    list-style-position: outside;
+    list-style-image: none;
+}
+
+.default-css  ol {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 2.5em;
+    padding-left: 40px;
+    list-style-type: decimal;
+    list-style-position: outside;
+    list-style-image: none;
+}
+
+.default-css li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}

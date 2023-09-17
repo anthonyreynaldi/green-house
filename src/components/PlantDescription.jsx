@@ -13,7 +13,7 @@ export default function PlantDescription({name, nameLatin, description}){
                 <div className="my-5"></div>
 
                 {/* Description */}
-                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description ?? " - ") }} />
+                <div className="default-css" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description ?? " - ") }} />
         </div>
     );
 }

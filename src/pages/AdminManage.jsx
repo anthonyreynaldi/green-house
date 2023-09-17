@@ -9,12 +9,12 @@ import {
     Spinner,
     DialogHeader,
     DialogFooter,
+    Alert,
 } from "@material-tailwind/react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useEffect, useState } from "react";
-import { XCircleIcon } from "@heroicons/react/24/solid";
+import { useEffect, useRef, useState } from "react";
+import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { createPlant, deletePlant, editPlant, getPlant, getPlantImageUrl, isTagExist, uploadPlantImage } from "../utils/plantDataUtils";
+import { Editor } from "@tinymce/tinymce-react";
 
 export default function AdminManage(){
     const { plantTag } = useParams();
@@ -28,7 +28,9 @@ export default function AdminManage(){
     const [isUploading, setIsUploading] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [currIndexDelete, setCurrIndexDelete] = useState(null);
+    const [errorImage, setErrorImage] = useState(null);
 
+    const editorRef = useRef(null);
 
     const handleOpenDelete = (index) => {
         setOpenDelete(!openDelete);
@@ -64,14 +66,28 @@ export default function AdminManage(){
         checkRequired();
     };
     
-    const handleDescription = (e, editor) => {
-        setDescription(editor.getData());
+    const handleDescription = () => {
+        // setDescription(editor.getData());
+        setDescription(editorRef.current.getContent());
         checkRequired();
     };
 
     const handleImages = async (e) => {
         const file = e.target.files[0];
         const fileName = Date.now() + "_" + file.name;
+
+        //validate image
+        if(file.size > 2000000){
+            setErrorImage("Gambar tidak boleh lebih dari 2 MB");
+            return;
+        }
+
+        if(file.type == null || !file.type.startsWith("image/") ){
+            setErrorImage("File yang diupload bukan gambar");
+            return;
+        }
+        
+        setErrorImage(null);
 
         //preview loading upload image
         setIsUploading(true);
@@ -105,7 +121,7 @@ export default function AdminManage(){
             name: name,
             nameLatin: nameLatin,
             tag: tag,
-            description: description,
+            description: editorRef.current.getContent(),
             images: images
         };
 
@@ -179,19 +195,27 @@ export default function AdminManage(){
                         Deskripsi
                     </Typography>
 
-                    <CKEditor
-                        editor={ClassicEditor}
-                        data={description}
-                        onChange={handleDescription}
-                        style={{ 
-                            '.ck-editor__editable_inline' : {
-                                padding: '100px !important'
-                            }
-                         }}
-                    />
+                    <Editor
+                            onInit={(evt, editor) => editorRef.current = editor}
+                            initialValue={description}
+                            init={{
+                                height: 500,
+                                menubar: false,
+                                plugins: [
+                                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
+                                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                    'insertdatetime', 'media', 'table', 'preview', 'help', 'wordcount'
+                                ],
+                                toolbar: 'undo redo | blocks | ' +
+                                    'bold italic forecolor | alignleft aligncenter ' +
+                                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                                    'removeformat | help',
+                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                            }}
 
-                    <div className="revert-css" dangerouslySetInnerHTML={{ __html: description }}></div>
-                    
+                            onBlur={handleDescription}
+                        />
+
                     <Typography variant="h6" color="blue-gray" className="my-5 text-left">
                         Gambar
                     </Typography>
@@ -238,6 +262,20 @@ export default function AdminManage(){
                             <input id="dropzone-file" type="file" accept="image/*" className="hidden" onChange={handleImages}/>
                         </label>
                     </div> 
+
+                    {
+                        errorImage ? 
+                        (
+                            <Alert
+                                icon={<ExclamationTriangleIcon className="w-6 h-6"/>}
+                                className="rounded-lg border-l-4 border-yellow-900 bg-yellow-100 font-medium text-yellow-900 my-3"
+                                >
+                                {errorImage}
+                            </Alert>
+                        )
+                        :
+                        ("")
+                    }
 
                     <Button className="mt-6" fullWidth disabled={disabledButton} onClick={handleSave}>
                         SIMPAN
