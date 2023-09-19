@@ -19,7 +19,7 @@ export default function NavbarLayout() {
                     className="mr-4 ml-2 cursor-pointer py-1.5"
                     >
                         <Link to="/">
-                            Green House RW 5, Siwalankerto 
+                            Green House
                         </Link>
                     </Typography>
 
