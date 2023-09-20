@@ -5,17 +5,29 @@ import {
     Button,
     Input,
   } from "@material-tailwind/react";
+import { useScroll } from './hooks.jsx'
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { isLogin, signOutAuth } from "../utils/Auth";
 
 export default function NavbarLayout() {
+    const {scrollDirection} = useScroll();
+
+    const styles = {
+        active: {
+            transition: "all 0.5s"
+        },
+        hidden: {
+            transition: "all.o.5s",
+            transform: "translateY(-150%)"
+        }
+    }
     return(
         <>
-            <Navbar className="mt-4 mx-auto max-w-screen-xl px-4 py-3 bg-green-400" data-aos="fade-left">
+            <Navbar className="Header bg-green-400" data-aos="fade-left" style={scrollDirection === "down" ? styles.active: styles.hidden}>
                 <div className="flex flex-wrap items-center justify-between gap-y-4 text-blue-gray-900">
                     <Typography
-                    variant="h6"
+                    variant="h6"    
                     className="mr-4 ml-2 cursor-pointer py-1.5"
                     >
                         <Link to="/">
