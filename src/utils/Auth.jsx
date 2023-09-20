@@ -21,7 +21,7 @@ export const getCurrentUser = () => {
 }
 
 export const isAllowedUser = (email) => {
-    return allowedEmail.includes(email);
+    return allowedEmail.includes(email.toLowerCase());
 }
 
 export const signInWithGoogle = async () => {
@@ -36,7 +36,7 @@ export const signInWithGoogle = async () => {
         }
         
         //save session to local storage
-        const userJson = JSON.stringify({email: user.email, name: user.displayName});
+        const userJson = JSON.stringify({email: user.email, name: user.displayName, photoURL: user.photoURL});
         console.log(userJson);
 
         //encrypt the data for safety

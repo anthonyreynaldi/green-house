@@ -13,11 +13,12 @@ import {
 } from "@material-tailwind/react";
 import { useEffect, useRef, useState } from "react";
 import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/solid";
-import { createPlant, deletePlant, editPlant, getPlant, getPlantImageUrl, isTagExist, uploadPlantImage } from "../utils/plantDataUtils";
+import { createPlant, deletePlant, editPlant, getAllPlant, getPlant, getPlantImageUrl, isTagExist, uploadPlantImage } from "../utils/plantDataUtils";
 import { Editor } from "@tinymce/tinymce-react";
 
 export default function AdminManage(){
     const { plantTag } = useParams();
+    const [allPlants, setAllPlants] = useState("");
     const [name, setName] = useState("");
     const [nameLatin, setNameLatin] = useState("");
     const [tag, setTag] = useState("");
@@ -41,24 +42,47 @@ export default function AdminManage(){
         console.log("chekced = " + (name === "" || nameLatin === "" || tag === ""));
         setDisableButton(name === "" || nameLatin === "" || tag === "");
     }
+
+    const numTagExist = (tag) => {
+        const regexPattern = new RegExp(`^${tag}`, 'i');
+
+        const filteredData = allPlants.filter((item) => regexPattern.test(item.tag));
+
+        return filteredData.length;
+    }
     
     const handleName = (e) => {
         const newName = e.target.value;
+        //convert to kebab
         let tempTag = newName.replace(/([a-z])([A-Z])/g, "$1-$2").replace(/[\s_]+/g, '-').toLowerCase();
 
-        isTagExist(tempTag).then((numExist) => {
-            if (numExist) {
-                tempTag = tempTag + (numExist + 1);
-                console.log("plant tag exist");
+        //use realtime data (cause lag)
+        // isTagExist(tempTag).then((numExist) => {
+        //     if (numExist) {
+        //         tempTag = tempTag + (numExist + 1);
+        //         console.log("plant tag exist");
 
-            }else{
-                console.log("plant tag not yet existed");
-            }
+        //     }else{
+        //         console.log("plant tag not yet existed");
+        //     }
 
-            setTag(tempTag);
-            setName(newName);
-            checkRequired();
-        });
+        //     setTag(tempTag);
+        //     setName(newName);
+        //     checkRequired();
+        // });
+        
+        const numExist = numTagExist(tempTag);
+        if (numExist > 0 && newName != "") {
+            tempTag = tempTag + (numExist + 1);
+            console.log("plant tag exist");
+
+        }else{
+            console.log("plant tag not yet existed");
+        }
+
+        setTag(tempTag);
+        setName(newName);
+        checkRequired();
 
     };
     const handleNameLatin = (e) => {
@@ -154,7 +178,7 @@ export default function AdminManage(){
     }
 
     useEffect(() => {
-        const init = () => {
+        const init = async () => {
             if(plantTag){
                 getPlant(plantTag).then((plant) => {
                     setName(plant.name);
@@ -164,6 +188,9 @@ export default function AdminManage(){
                     setImages(plant.images);
                 });
             }
+
+            const plantData = await getAllPlant();
+            setAllPlants(plantData);
         }
         
         init();
@@ -175,7 +202,7 @@ export default function AdminManage(){
     return(
         <>
             <div className="grid mt-5" data-aos="fade-left">
-                <Card className="text-center p-5" color="transparent" shadow={true}>
+                <Card className="text-center p-5" color="white" shadow={true}>
                     <Typography variant="h4" color="blue-gray" className="mb-5">
                         Manage Tanaman
                     </Typography>

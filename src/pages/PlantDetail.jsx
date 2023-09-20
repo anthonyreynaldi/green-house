@@ -18,8 +18,7 @@ export default function PlantDetail(){
                 setIsPlantExist(false);
             }
         });
-    }, [])
-
+    }, [plantTag])
 
     return(
         <>

@@ -26,6 +26,7 @@ const TABLE_HEAD = ["Gambar", "Tag", "Nama", "Nama Latin", "QR Code", "Edit", "H
  
 export function PlantTable() {
     const [TABLE_ROWS, setTABLE_ROWS] = useState([]);
+    const [allPlants, setAllPlants] = useState([]);
     const [isPlantExist, setIsPlantExist] = useState(true);
     const [open, setOpen] = useState(false);
     const [plantId, setPlantId] = useState(null);
@@ -47,6 +48,7 @@ export function PlantTable() {
             deletePlant(plantId).then(() => {
                 getAllPlant().then((allPlants) => {
                     if(allPlants){
+                        setAllPlants(allPlants);
                         setTABLE_ROWS(allPlants);
                     }else{
                         setIsPlantExist(false);
@@ -57,9 +59,23 @@ export function PlantTable() {
         setOpen(!open);
     }
 
+    const handleSearch = (keyword) => {
+        if(keyword == ""){
+            setTABLE_ROWS(allPlants);
+            return;
+        }
+
+        keyword = keyword.toLowerCase();
+
+        const tempFilter = allPlants.filter((item) => item.name.toLowerCase().includes(keyword) || item.nameLatin.toLowerCase().includes(keyword) || item.tag.toLowerCase().includes(keyword));
+
+        setTABLE_ROWS(tempFilter);
+    }
+
     useEffect(() => {
         getAllPlant().then((allPlants) => {
             if(allPlants){
+                setAllPlants(allPlants);
                 setTABLE_ROWS(allPlants);
             }else{
                 setIsPlantExist(false);
@@ -73,6 +89,7 @@ export function PlantTable() {
             console.log("popedd");
             getAllPlant().then((allPlants) => {
                 if(allPlants){
+                    setAllPlants(allPlants);
                     setTABLE_ROWS(allPlants);
                 }else{
                     setIsPlantExist(false);
@@ -102,11 +119,12 @@ export function PlantTable() {
                             CRUD
                         </Typography>
                     </div>
-                    <div className="flex w-full shrink-0 gap-2 md:w-max">
+                    <div className="flex flex-col w-full shrink-0 gap-2 md:w-max md:flex-row">
                         <div className="w-full md:w-72">
                         <Input
                             label="Search"
                             icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                            onChange={(e) => handleSearch(e.target.value)}
                         />
                         </div>
 

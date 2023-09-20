@@ -8,26 +8,31 @@ import Admin from './pages/Admin'
 import AdminManage from './pages/AdminManage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Login from './pages/Login'
+import Logout from './pages/Logout'
 
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={ <BaseLayout/> } >
-            <Route index element={ <Home/> } />
-            <Route path='tanaman/:plantTag' element={ <PlantDetail/> } />
-            <Route path='login' element={ <Login/> } />
-            <Route element={ <PrivateRoutes/> } >
-              <Route path='admin' element={ <Admin/> } />
-              <Route path='admin/manage/:plantTag?' element={ <AdminManage/> } />
+    <div className='bg-repeat bg-[length:500px]' style={{backgroundImage: "url('/images/background.jpg')"}}>
+      <div className='bg-[#f2f4ea] bg-opacity-95'>
+        {/* <img className="h-full w-full object-cover" src=/> */}
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={ <BaseLayout/> } >
+              <Route index element={ <Home/> } />
+              <Route path='tanaman/:plantTag' element={ <PlantDetail/> } />
+              <Route path='login' element={ <Login/> } />
+              <Route path='logout' element={ <Logout/> } />
+              <Route element={ <PrivateRoutes/> } >
+                <Route path='admin' element={ <Admin/> } />
+                <Route path='admin/manage/:plantTag?' element={ <AdminManage/> } />
+              </Route>
+              <Route path='*' element={ <NoPage/> } />
             </Route>
-            <Route path='*' element={ <NoPage/> } />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </div>
   )
 }
 

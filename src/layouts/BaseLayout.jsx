@@ -5,10 +5,8 @@ import ComplexNavbar from "./NavbarLayout";
 export default function BaseLayout() {
     return (
         <>
-            <div style={{position: "fixed", zIndex: "1", marginLeft: "25%", width: "50%"}}>
+            <div className="container py-5 px-4 lg:mx-auto max-w-screen-xl min-h-screen">
                 <NavbarLayout/>
-            </div>
-            <div className="container px-4 lg:mx-auto max-w-screen-xl" style={{zIndex: "0"}}>
                 <Outlet/>
             </div>
         </>
