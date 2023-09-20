@@ -24,7 +24,7 @@ export default function PlantCardContainter(){
             <>
                 {
                     plantsData?
-                    <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4 place-content-center">
+                    <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4 place-content-center overflow-x-hidden">
                         {plantsData.map((plant, i) => (
                             <PlantCard key={i} name={plant.name} nameLatin={plant.nameLatin} images={plant.images} tag={plant.tag}/>
                         ))}
