@@ -4,5 +4,5 @@ RewriteBase /rw5-green-house/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
-RewriteRule . /dist/index.html [L]
+RewriteRule ^ dist/index.html [L]
 </IfModule>
