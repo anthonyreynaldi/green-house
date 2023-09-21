@@ -207,7 +207,7 @@ export default function AdminManage(){
                         Manage Tanaman
                     </Typography>
 
-                    <div className="mb-4 grid grid-cols-2 gap-6">
+                    <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-6">
                         <Input size="lg" label="Nama" onChange={handleName} value={name} required/>
                         <Input size="lg" label="Nama Latin" onChange={handleNameLatin} value={nameLatin} required/>
                     </div>
@@ -247,9 +247,9 @@ export default function AdminManage(){
                         Gambar
                     </Typography>
        
-                    <div className="grid grid-cols-5 gap-4 mb-5">
+                    <div className="flex flex-wrap space-x-4 gap-4 mb-5">
                         {images.map((img, i) => (
-                            <figure className="relative h-40 w-full" key={i}>
+                            <figure className="relative h-40 w-40" key={i}>
                                 <img
                                     className={`h-full w-full rounded-xl object-cover object-center ${/*last image*/ i == images.length - 1 && isUploading ? "blur-sm" : ""}`}
                                     src={img}
