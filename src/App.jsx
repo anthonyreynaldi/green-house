@@ -16,7 +16,7 @@ function App() {
     <div className='bg-repeat bg-[length:500px]' style={{backgroundImage: "url('/images/background.jpg')"}}>
       <div className='bg-[#f2f4ea] bg-opacity-95'>
         {/* <img className="h-full w-full object-cover" src=/> */}
-        <BrowserRouter>
+        <BrowserRouter basename={"rw5-green-house"}>
           <Routes>
             <Route path='/' element={ <BaseLayout/> } >
               <Route index element={ <Home/> } />
