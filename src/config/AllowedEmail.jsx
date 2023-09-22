@@ -1,5 +1,2 @@
-export const allowedEmail = [
-    "anthony.reynaldi@gmail.com",
-    "c14200078@john.petra.ac.id",
-    "c14210230@john.petra.ac.id",
-];
+const tempEmail = import.meta.env.VITE_ALLOWED_EMAIL
+export const allowedEmail = tempEmail.split(',');

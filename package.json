@@ -1,5 +1,5 @@
 {
-  "homepage": "https://anthonyreynaldi.github.io/green-house",
+  "homepage": "",
   "name": "green-house",
   "private": true,
   "version": "0.0.0",
@@ -19,6 +19,7 @@
     "aos": "^3.0.0-beta.6",
     "crypto-js": "^4.1.1",
     "dompurify": "^3.0.5",
+    "dotenv": "^16.3.1",
     "file-saver": "^2.0.5",
     "firebase": "^10.3.1",
     "fs-extra": "^11.1.1",
