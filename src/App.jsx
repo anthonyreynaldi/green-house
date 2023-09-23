@@ -9,6 +9,7 @@ import AdminManage from './pages/AdminManage'
 import PrivateRoutes from './utils/PrivateRoutes'
 import Login from './pages/Login'
 import Logout from './pages/Logout'
+import AdminEmail from './pages/AdminEmail'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
               <Route element={ <PrivateRoutes/> } >
                 <Route path='admin' element={ <Admin/> } />
                 <Route path='admin/manage/:plantTag?' element={ <AdminManage/> } />
+                <Route path='admin/email' element={ <AdminEmail/> } />
               </Route>
               <Route path='*' element={ <NoPage/> } />
             </Route>

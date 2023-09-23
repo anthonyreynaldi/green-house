@@ -15,8 +15,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-export const collectionName = "plants";
-export const plantsCollectionRef = collection(db, collectionName);
+export const plantsCollectionName = "plants";
+export const plantsCollectionRef = collection(db, plantsCollectionName);
+
+export const emailsCollectionName = "emails";
+export const emailsCollectionRef = collection(db, emailsCollectionName);
+
 export const storage = getStorage(app);
 export const plantImageFolder = "plant-images/";
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PlantCard from "./PlantCard"
 import { Spinner, Typography } from "@material-tailwind/react";
-import { getAllPlant } from "../utils/plantDataUtils";
+import { getAllPlant } from "../utils/PlantDataUtils";
 
 export default function PlantCardContainter(){
     const [plantsData, setPlantsData] = useState(null);

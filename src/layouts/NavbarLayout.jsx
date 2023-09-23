@@ -27,11 +27,12 @@ import {
   RocketLaunchIcon,
   Bars2Icon,
   MagnifyingGlassIcon,
+  AtSymbolIcon
 } from "@heroicons/react/24/outline";
 import { Link, Navigate } from "react-router-dom";
 import logo from "/images/logo-bg.png";
 import { getCurrentUser, isLogin } from "../utils/Auth";
-import { getAllPlant } from "../utils/plantDataUtils";
+import { getAllPlant } from "../utils/PlantDataUtils";
  
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -185,6 +186,11 @@ const navListItems = isLogin() ?
         label: "Admin",
         icon: UserCircleIcon,
         link: "/admin"
+    },
+    {
+        label: "Email",
+        icon: AtSymbolIcon,
+        link: "/admin/email"
     }
 ]
 :

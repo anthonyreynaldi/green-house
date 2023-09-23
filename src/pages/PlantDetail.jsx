@@ -3,7 +3,7 @@ import PlantDetailCarousel from "../components/PlantDetailCarousel";
 import PlantDescription from "../components/PlantDescription";
 import { useEffect, useState } from "react";
 import { Spinner, Typography } from "@material-tailwind/react";
-import { getPlant } from "../utils/plantDataUtils";
+import { getPlant } from "../utils/PlantDataUtils";
 
 export default function PlantDetail(){
     const { plantTag } = useParams()

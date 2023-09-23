@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { redirect, useNavigate, useParams } from "react-router-dom";
 import {
     Card,
     Input,
@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { useEffect, useRef, useState } from "react";
 import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/solid";
-import { createPlant, deletePlant, editPlant, getAllPlant, getPlant, getPlantImageUrl, isTagExist, uploadPlantImage } from "../utils/plantDataUtils";
+import { createPlant, deletePlant, editPlant, getAllPlant, getPlant, getPlantImageUrl, isTagExist, uploadPlantImage } from "../utils/PlantDataUtils";
 import { Editor } from "@tinymce/tinymce-react";
 
 export default function AdminManage(){
@@ -32,6 +32,8 @@ export default function AdminManage(){
     const [errorImage, setErrorImage] = useState(null);
 
     const editorRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const handleOpenDelete = (index) => {
         setOpenDelete(!openDelete);
@@ -166,7 +168,7 @@ export default function AdminManage(){
             //edit plant
             await editPlant(newPlant);
         }
-        return history.back();
+        return navigate("/admin");
     };
 
     const handleDeleteImage = () => {
@@ -190,7 +192,7 @@ export default function AdminManage(){
             }
 
             const plantData = await getAllPlant();
-            setAllPlants(plantData);
+            plantData ? setAllPlants(plantData) : setAllPlants([]);
         }
         
         init();

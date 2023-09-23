@@ -1,5 +1,5 @@
 import { deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
-import { collectionName, db, plantImageFolder, plantsCollectionRef, storage } from "../config/firebase";
+import { plantsCollectionName, db, plantImageFolder, plantsCollectionRef, storage } from "../config/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 export const getAllPlant = async () => {
@@ -26,7 +26,7 @@ export const getAllPlant = async () => {
 
 export const getPlant = async (plantTag) => {
     try {
-        const docRef = doc(db, collectionName, plantTag);
+        const docRef = doc(db, plantsCollectionName, plantTag);
         const docSnapshot = await getDoc(docRef);
         
         if (docSnapshot.exists()) {
@@ -44,7 +44,7 @@ export const getPlant = async (plantTag) => {
 
 export const deletePlant = async (plantId) => {
     try {
-        const docRef = doc(db, collectionName, plantId);
+        const docRef = doc(db, plantsCollectionName, plantId);
         await deleteDoc(docRef);
         console.log(plantId + " deleted");
 
@@ -55,7 +55,7 @@ export const deletePlant = async (plantId) => {
 
 export const editPlant = async (newPlant) => {
     try {
-        await setDoc(doc(db, collectionName, newPlant.tag), newPlant);
+        await setDoc(doc(db, plantsCollectionName, newPlant.tag), newPlant);
         console.log("success to add new plant")
 
     } catch (error) {
