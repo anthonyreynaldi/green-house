@@ -4,7 +4,7 @@
 
 import { getAllowedEmail } from "../utils/Email";
 
-const setAllowedEmail = async () => {
+async function AllowedEmail() {
     const tempAllowedEmail = await getAllowedEmail();
     if(tempAllowedEmail){
         return tempAllowedEmail.map((item) => item.email);
@@ -13,4 +13,4 @@ const setAllowedEmail = async () => {
     }
 }
 
-export const allowedEmail = await setAllowedEmail();
+export default AllowedEmail;

@@ -1,7 +1,8 @@
 import { signInWithPopup, signOut } from "firebase/auth"
-import { auth, googleProvider } from "../config/firebase"
+import { auth, db, emailsCollectionName, googleProvider } from "../config/firebase"
 import { decrypt, encrypt } from "./Crypto";
-import { allowedEmail } from "../config/AllowedEmail";
+import AllowedEmail from "../config/AllowedEmail";
+import { doc, getDoc } from "firebase/firestore";
 
 export const isLogin = () => {
     return getCurrentUser() ? true : false;
@@ -20,8 +21,28 @@ export const getCurrentUser = () => {
     }
 }
 
-export const isAllowedUser = (email) => {
-    return allowedEmail.includes(email.toLowerCase());
+// use harcode email
+// export const isAllowedUser = (email) => {
+//     return allowedEmail.includes(email.toLowerCase());
+// }
+
+export const isAllowedUser = async (email) => {
+    try {
+        const docRef = doc(db, emailsCollectionName, email);
+        const docSnapshot = await getDoc(docRef);
+        
+        if (docSnapshot.exists()) {
+            console.log('user document exist!');
+            return true;
+        } else {
+            // Document doesn't exist
+            console.log('No such user document!');
+            return false;
+        }
+    } catch (error) {
+        console.error('Error fetching document:', error);
+        return false;
+    }
 }
 
 export const signInWithGoogle = async () => {
@@ -31,7 +52,8 @@ export const signInWithGoogle = async () => {
         const user = auth.currentUser;
         
         //check allowed user
-        if(!isAllowedUser(user.email)){
+        const isAllowed = await isAllowedUser(user.email);
+        if(!isAllowed){
             throw "not allowed user";
         }
         
