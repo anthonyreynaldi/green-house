@@ -140,7 +140,7 @@ export default function AdminEmail() {
                                 type="email"
                                 label="Email Baru"
                                 value={newEmail}
-                                onChange={(e) => setNewEmail(e.target.value)}
+                                onChange={(e) => setNewEmail(e.target.value.toLowerCase())}
                                 className="pr-20"
                                 containerProps={{
                                 className: "min-w-0",
