@@ -251,7 +251,7 @@ export default function NavbarLayout() {
                         src={logo}
                     />
 
-                    Green House RW 5
+                    Tanaman Obat Keluarga Siwalankerto
                 </Typography>
             </Link>
 
