@@ -236,20 +236,19 @@ export default function NavbarLayout() {
     <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6 bg-gradient-to-br from-[#1aaf91] to-[#25c986]">
 
         <div className="relative mx-auto flex items-center text-blue-gray-900">
-            <Link to="/" >
+            <Link to="/" className="flex">
             
-                {/* <Image /> */}
+                <Avatar
+                    variant="circular"
+                    size="sm"
+                    alt="tania andrew"
+                    className="mr-2 p-0.5"
+                    src={logo}
+                />
                 <Typography
                     variant="h6"
                     className="mr-4 ml-2 cursor-pointer py-1.5"
                 >
-                    <Avatar
-                        variant="circular"
-                        size="sm"
-                        alt="tania andrew"
-                        className="mr-2 p-0.5"
-                        src={logo}
-                    />
 
                     Tanaman Obat Keluarga Siwalankerto
                 </Typography>
